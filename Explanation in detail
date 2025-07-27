@@ -1,0 +1,120 @@
+PART 1 (DDL Commands):- 
+
+1. 
+
+CREATE TABLE Authors (
+    author_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    country VARCHAR(50)
+);
+
+EXPLANATION :
+
+CREATE TABLE Authors (...)
+→ This creates a table called Authors, which will store details regarding authors of books.
+
+
+author_id INT PRIMARY KEY
+→ author_id is an integer column and also the PRIMARY KEY. This means:
+
+
+It uniquely identifies each author
+
+
+Prohibits duplicates
+
+
+Prohibits NULLs
+
+
+name VARCHAR(50)
+→ This will hold the author's name, with a variable character field with a maximum of 50 characters.
+
+
+country VARCHAR(50)
+→ This will hold the country of the author — same, up to 50 characters.
+
+
+✅ This table describes who wrote the books.
+
+2. 
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author_id INT,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+);
+
+EXPLANATION:
+
+CREATE TABLE Books (...)
+→ This statement creates a table called Books to store information about each book.
+
+
+book_id INT PRIMARY KEY
+→ book_id is the unique identifier for every book. It is similar in concept to author_id.
+
+
+title VARCHAR(100)
+→ Where the title of the book is stored; it can be up to 100 characters long.
+
+
+author_id INT
+→ This refers to the author that wrote the book; it links this book to someone in the Authors table.
+
+
+FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+→ This adds a foreign key constraint:
+
+
+Makes it so that any author_id entered in the Books table must exist in the Authors table.
+
+
+Prevents orphaned records (i.e., a book with an author that does not exist).
+
+
+PART 2 (Inserting the elements to the table 
+
+1. 
+INSERT INTO Authors (author_id, name, country) VALUES
+(1, 'George Orwell', 'UK'),
+(2, 'Haruki Murakami', 'Japan'),
+(3, 'Jane Austen', 'UK');
+
+Inserting the elemnts to the table under the required segments like the author id, the name and the country of the author form where the author is and assigning them the ID, into the Authors table 
+
+2. 
+INSERT INTO Books (book_id, title, author_id) VALUES
+(101, '1984', 1),
+(102, 'Animal Farm', 1),
+(103, 'Norwegian Wood', 2),
+(104, 'Pride and Prejudice', 3),
+(105, 'Emma', 3);
+
+
+Inserting the elements to the tables under the required segments like the book id, title, author id and assigning them all the values inserted by the user for the values to be inserted inside the table. 
+
+PART 3 (Retriving data using INNER JOIN) 
+
+1.
+SELECT 
+    B.title AS Book_Title,
+    A.name AS Author_Name,
+    A.country AS Author_Country
+FROM 
+    Books B
+INNER JOIN 
+    Authors A ON B.author_id = A.author_id;
+
+Select --> This defines what columns we use we want to see in the results 
+Now,
+In order to make the output look clean we use the following three commands 
+
+B.title AS Book_Title --> Select the title column from the Books table and alias it as Book_Title
+A.name AS Author_Name --> Select name from the Authors table and alias it
+A.country AS Author_Country --> Include author's country too 
+
+
+FROM Books B INNER JOIN Authors A ON B.author_id = A.author_id
+In  this line we are quering the code in a way that we are assigning the books table and giving it a shortcut alias 
+and also joining the authors table to alias A on a condition that it matches each authors book with the actual authors id 
